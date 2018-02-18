@@ -2,7 +2,7 @@
 
 import program from 'commander';
 
-import pkg from '../package.json';
+import pkg from '../../package.json';
 
 program.version(pkg.version)
   .description('Search flights from the command line')
