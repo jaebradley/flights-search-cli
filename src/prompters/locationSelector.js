@@ -25,13 +25,13 @@ class LocationSelector {
   }
 
   async findMatches(location = '') {
-    const searchResults = await searchLocationsByTerm({ term: location });
+    const searchResults = await searchLocationsByTerm({ term: location, limit: 5 });
 
     const locationNames = [];
     searchResults.locations.forEach((result) => {
       if (result.active) {
-        const formattedLocationType = formatLocationType(result.type);
-        const locationKey = `${result.name} (${formattedLocationType})`;
+        const formattedLocationType = formatLocationType(result.type, result.code);
+        const locationKey = `${result.name} ${formattedLocationType}`;
         this.locations[locationKey] = result;
         locationNames.push(locationKey);
       }

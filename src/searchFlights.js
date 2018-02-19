@@ -1,6 +1,7 @@
 import inquirer from 'inquirer';
 import moment from 'moment-timezone';
 import { searchFlights as search } from 'skypicker';
+import open from 'open';
 import selectDepartureWindow from './prompters/selectDepartureWindow';
 import selectIsRoundTrip from './prompters/selectIsRoundTrip';
 import LocationSelector from './prompters/locationSelector';
@@ -32,7 +33,7 @@ const searchFlights = async () => {
   if (isRoundTrip) {
     roundTripDepartureWindow = await selectDepartureWindow();
     returnDepartureDateTimeRange = {
-      date: {
+      days: {
         start: formatDate(roundTripDepartureWindow.date.start),
         end: formatDate(roundTripDepartureWindow.date.end),
       },
@@ -49,7 +50,7 @@ const searchFlights = async () => {
     departureIdentifier: origin.id,
     arrivalIdentifier: destination.id,
     departureDateTimeRange: {
-      date: {
+      days: {
         start: formatDate(departureWindow.date.start),
         end: formatDate(departureWindow.date.end),
       },
@@ -64,13 +65,21 @@ const searchFlights = async () => {
       end: maximumPrice,
     },
     currencyCode: 'USD', // TODO @jaebradley: change from hard-coded value
+    partner: 'picky',
     directFlightsOnly,
-    limit: 10,
+    limit: 25,
   };
 
   const searchResults = await search(parameters);
 
-  const formattedTrips = searchResults.data.map(result => formatTrip(result));
+  const tripMapping = {};
+  const formattedTrips = [];
+  searchResults.data.forEach((result) => {
+    const formattedTrip = formatTrip(result);
+    tripMapping[formattedTrip] = result.deep_link;
+    formattedTrips.push(formattedTrip);
+  });
+
   const { trip } = await inquirer.prompt([
     {
       type: 'list',
@@ -79,6 +88,8 @@ const searchFlights = async () => {
       choices: formattedTrips,
     },
   ]);
+
+  open(tripMapping[trip]);
 };
 
 export default searchFlights;
