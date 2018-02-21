@@ -1,4 +1,4 @@
-import { searchLocationsByTerm } from 'skypicker';
+import { searchLocationsByTerm, LOCATION_TYPES } from 'skypicker';
 import inquirer from 'inquirer';
 import inquirerAutocompletePrompt from 'inquirer-autocomplete-prompt';
 import formatLocationType from '../formatters/formatLocationType';
@@ -25,11 +25,15 @@ class LocationSelector {
   }
 
   async findMatches(location = '') {
-    const searchResults = await searchLocationsByTerm({ term: location, limit: 5 });
+    const searchResults = await searchLocationsByTerm({
+      term: location,
+      limit: 5,
+      locationTypes: [LOCATION_TYPES.AIRPORT],
+    });
 
     const locationNames = [];
     searchResults.locations.forEach((result) => {
-      if (result.active) {
+      if (result.active && result.type === 'airport') {
         const formattedLocationType = formatLocationType(result.type, result.code);
         const locationKey = `${result.name} ${formattedLocationType}`;
         this.locations[locationKey] = result;
