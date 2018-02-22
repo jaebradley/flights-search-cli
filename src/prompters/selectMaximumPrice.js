@@ -17,6 +17,7 @@ const selectMaximumPrice = async () => {
       name: 'maximumPrice',
       message: 'Select maximum price (USD)', // TODO: @jaebradley change hard-coded currency
       validate: isValidPrice,
+      default: 2000,
     },
   ]);
   return maximumPrice;
