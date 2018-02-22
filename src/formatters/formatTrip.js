@@ -20,12 +20,15 @@ const formatTrip = (trip) => {
 
   if (route) {
     const firstRoute = route[0];
-    const departureTime = moment(1000 * firstRoute.dTime).format(timeFormat);
+    // Skypicker defines the local departure / arrival times in UTC
+    // moment automatically converts the UTC timestamp to best-guess local timestamp
+    // So need to convert "back" to UTC in order to get correct local timestamp
+    const departureTime = moment(1000 * firstRoute.dTime).tz('GMT').format(timeFormat);
     formattedTripDetails = `${formattedTripDetails} | 🛫  ${departureTime} (${departureDuration})`;
 
     if (route.length > 1 && returnDuration) {
       const lastRoute = route[route.length - 1];
-      const arrivalTime = moment(1000 * lastRoute.aTime).format(timeFormat);
+      const arrivalTime = moment(1000 * lastRoute.aTime).tz('GMT').format(timeFormat);
       formattedTripDetails = `${formattedTripDetails} | 🛬  ${arrivalTime} (${returnDuration})`;
     }
   }
