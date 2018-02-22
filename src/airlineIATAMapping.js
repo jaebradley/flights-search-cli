@@ -1,3 +1,4 @@
+/* eslint-disable */
 const airlineIATAMapping = Object.freeze({
   '11': {
     'isLowCostCarrier': false,
