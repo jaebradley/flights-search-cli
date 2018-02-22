@@ -1,5 +1,5 @@
 {
-  "name": "flights-searcher-cli",
+  "name": "flights-search-cli",
   "version": "0.0.0-development",
   "description": "Search Flights From Your Terminal",
   "main": "index.js",
@@ -14,7 +14,8 @@
     "test": "jest --coverage --passWithNoTests",
     "prepublishOnly": "npm run compile",
     "gc": "commit",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
     "type": "git",
@@ -27,9 +28,9 @@
   "author": "jae.b.bradley@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jaebradley/flight-search-cli/issues"
+    "url": "https://github.com/jaebradley/flights-search-cli/issues"
   },
-  "homepage": "https://github.com/jaebradley/flight-search-cli#readme",
+  "homepage": "https://github.com/jaebradley/flights-search-cli#readme",
   "jest": {
     "testEnvironment": "node"
   },
@@ -46,7 +47,8 @@
     "eslint-plugin-import": "^2.8.0",
     "husky": "^0.14.3",
     "jest": "^22.3.0",
-    "semantic-release": "^12.4.1"
+    "semantic-release": "^12.4.1",
+    "travis-deploy-once": "^4.3.4"
   },
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
