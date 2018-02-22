@@ -12,7 +12,7 @@ Search flights from the command line!
 ## Install
 
 ```
-npm install flight-searcher-cli --global
+npm install flights-search-cli --global
 ```
 
 ## Usage
