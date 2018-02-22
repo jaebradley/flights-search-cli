@@ -1,6 +1,7 @@
 # flight-searcher-cli
 
 ![alt-text](https://imgur.com/54yeBhy.png)
+![alt-text](https://media.giphy.com/media/1k0AuLZvV7FcMTkDrc/giphy.gif)
 
 Search flights from the command line!
 
