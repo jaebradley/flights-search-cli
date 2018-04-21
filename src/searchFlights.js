@@ -7,6 +7,7 @@ import selectIsRoundTrip from './prompters/selectIsRoundTrip';
 import LocationSelector from './prompters/locationSelector';
 import selectMaximumPrice from './prompters/selectMaximumPrice';
 import selectDirectFlightsOnly from './prompters/selectDirectFlightsOnly';
+import selectPassengerCount from './prompters/selectPassengerCount';
 import formatTrip from './formatters/formatTrip';
 
 const formatDate = ({ date, month, year }) => moment()
@@ -44,6 +45,7 @@ const searchFlights = async () => {
     };
   }
 
+  const passengerCount = await selectPassengerCount();
   const maximumPrice = await selectMaximumPrice();
   const directFlightsOnly = await selectDirectFlightsOnly();
   const parameters = {
@@ -66,6 +68,7 @@ const searchFlights = async () => {
     },
     currencyCode: 'USD', // TODO @jaebradley: change from hard-coded value
     partner: 'picky',
+    passengerCount,
     directFlightsOnly,
     limit: 25,
   };
