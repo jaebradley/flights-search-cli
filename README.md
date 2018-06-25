@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/jaebradley/flights-search-cli.svg?branch=master)](https://travis-ci.org/jaebradley/flights-search-cli)
 [![npm](https://img.shields.io/npm/v/flights-search-cli.svg)](https://www.npmjs.com/package/flights-search-cli)
-[![npm](https://img.shields.io/npm/dt/flights-search-cli.svg)](https://www.npmjs.com/package/flights-search-cli)
+[![npm](https://img.shields.io/npm/dt/flights-search-cli.svg)](https://www.npmjs.com/package/flights-search-cli) [![Greenkeeper badge](https://badges.greenkeeper.io/jaebradley/flights-search-cli.svg)](https://greenkeeper.io/)
 
 ![alt-text](https://imgur.com/54yeBhy.png)
 ![alt-text](https://media.giphy.com/media/1k0AuLZvV7FcMTkDrc/giphy.gif)
