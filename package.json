@@ -38,7 +38,7 @@
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-angular": "^7.0.1",
     "@commitlint/prompt": "^7.0.0",
-    "@commitlint/prompt-cli": "^7.0.0",
+    "@commitlint/prompt-cli": "^8.0.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "codecov": "^3.0.0",
