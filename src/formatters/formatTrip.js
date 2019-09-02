@@ -16,7 +16,7 @@ const formatTrip = (trip) => {
   const timeFormat = 'ddd, M/D/YY h:mm A';
 
   // TODO @jaebradley change from hard-coded USD price
-  let formattedTripDetails = `${flyFrom} ➡️  ${flyTo} | 💰  $${price} | ✈️  ${airlines.map(airline => airlineIATAMapping[airline].name).join(' / ')}`;
+  let formattedTripDetails = `${flyFrom} ➡️  ${flyTo} | 💰  $${price} | ✈️  ${airlines.map((airline) => airlineIATAMapping[airline].name).join(' / ')}`;
 
   if (route) {
     const firstRoute = route[0];
