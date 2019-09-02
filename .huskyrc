@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "pre-commit": "npm run commitlint && npm run lint"
+  }
+}
