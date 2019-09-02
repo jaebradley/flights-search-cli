@@ -43,7 +43,7 @@ To build the project locally
    * This should execute the Babel transpilation process and output files to the `build` directory
 1. Execute [the `npm link`](https://docs.npmjs.com/cli/link) command
    * This should symlink the `bin` executable file (`build/executables/flights.js`)
-1. Execute any of the commands like (`flights search`)
+1. Execute any of the commands (like `flights search`)
 
 After making changes to the source code, you will need to rebuild the project and re-link the updated `build` files in order to test any changes you've made to the source code.
 
