@@ -21,48 +21,50 @@ const formatTimeOfDay = ({ hour, minute }) => moment()
   .minute(minute)
   .format('HH:mm');
 
-const searchFlights = async () => {
+const searchFlights = async ({
+  origin,
+  destination,
+  departureDateTimeRange,
+  returnDateTimeRange,
+  maximumPrice,
+  onlyDirectFlights,
+}) => {
   const locationSelector = new LocationSelector();
-  const origin = await locationSelector.select('Select origin');
-  const destination = await locationSelector.select('Select destination');
-  const departureWindow = await selectDepartureWindow();
-  const isRoundTrip = await selectIsRoundTrip();
+  const originParameter = origin || await locationSelector.select('Select origin');
+  const destinationParamter = destination || await locationSelector.select('Select destination');
+  const departureWindow = departureDateTimeRange || await selectDepartureWindow();
+  const isRoundTrip = (departureDateTimeRange && returnDateTimeRange) || await selectIsRoundTrip();
 
   let roundTripDepartureWindow;
   let returnDepartureDateTimeRange;
   if (isRoundTrip) {
-    roundTripDepartureWindow = await selectDepartureWindow();
-    returnDepartureDateTimeRange = {
-      days: {
-        start: formatDate(roundTripDepartureWindow.date.start),
-        end: formatDate(roundTripDepartureWindow.date.end),
-      },
-      timeOfDay: {
-        start: formatTimeOfDay(roundTripDepartureWindow.timeOfDay.start),
-        end: formatTimeOfDay(roundTripDepartureWindow.timeOfDay.end),
-      },
-    };
+    if (returnDateTimeRange) {
+      returnDepartureDateTimeRange = returnDateTimeRange;
+    } else {
+      roundTripDepartureWindow = await selectDepartureWindow();
+      returnDepartureDateTimeRange = {
+        days: {
+          start: formatDate(roundTripDepartureWindow.date.start),
+          end: formatDate(roundTripDepartureWindow.date.end),
+        },
+        timeOfDay: {
+          start: formatTimeOfDay(roundTripDepartureWindow.timeOfDay.start),
+          end: formatTimeOfDay(roundTripDepartureWindow.timeOfDay.end),
+        },
+      };
+    }
   }
 
-  const maximumPrice = await selectMaximumPrice();
-  const directFlightsOnly = await selectDirectFlightsOnly();
+  const maximumPriceParameter = maximumPrice || await selectMaximumPrice();
+  const directFlightsOnly = onlyDirectFlights || await selectDirectFlightsOnly();
   const parameters = {
-    departureIdentifier: origin.id,
-    arrivalIdentifier: destination.id,
-    departureDateTimeRange: {
-      days: {
-        start: formatDate(departureWindow.date.start),
-        end: formatDate(departureWindow.date.end),
-      },
-      timeOfDay: {
-        start: formatTimeOfDay(departureWindow.timeOfDay.start),
-        end: formatTimeOfDay(departureWindow.timeOfDay.end),
-      },
-    },
+    departureIdentifier: originParameter.id,
+    arrivalIdentifier: destinationParamter.id,
+    departureDateTimeRange: departureWindow,
     returnDepartureDateTimeRange,
     priceRange: {
       start: 0,
-      end: maximumPrice,
+      end: maximumPriceParameter,
     },
     currencyCode: 'USD', // TODO @jaebradley: change from hard-coded value
     partner: 'picky',
