@@ -22,7 +22,6 @@ program
   .action(async (command) => {
     try {
       const options = command.opts();
-      console.log('options', options);
       const {
         origin,
         destination,
@@ -38,21 +37,13 @@ program
         returnWindowOption: options.returningBetween,
         onlyDirectFlightsOption: options.directFlight,
       });
-      console.log('args', {
-        origin,
-        destination,
-        departureDateTimeRange,
-        returnDateTimeRange,
-        maximumPrice,
-        onlyDirectFlights,
-      });
       await searchFlights({
-        origin,
-        destination,
-        departureDateTimeRange,
-        returnDateTimeRange,
-        maximumPrice,
-        onlyDirectFlights,
+        originOption: origin,
+        destinationOption: destination,
+        departureDateTimeRangeOption: departureDateTimeRange,
+        returnDateTimeRangeOption: returnDateTimeRange,
+        maximumPriceOption: maximumPrice,
+        onlyDirectFlightsOption: onlyDirectFlights,
       });
     } catch (e) {
       console.error(`Rut ro - there was an error: ${e}`); // eslint-disable-line no-console
