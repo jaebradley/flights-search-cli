@@ -18,7 +18,8 @@ program
   .option('-l, --leaving-between <window>', 'Date(s) or Datetime(s) of departure')
   .option('-r, --returning-between <window>', 'Date(s) or Datetime(s) of return')
   .option('-$, --max-price <usd_amount>', 'Max ticket price (in USD)')
-  .option('-0, --direct-flight', 'Only select direct flights')
+  .option('-d, --direct-flight', 'Only select direct flights')
+  .option('-1, --one-way', 'Do not consider return flight')
   .action(async (command) => {
     try {
       const options = command.opts();
@@ -29,6 +30,7 @@ program
         returnDateTimeRange,
         maximumPrice,
         onlyDirectFlights,
+        onlyOneWay,
       } = await identifyOptions({
         startAirportOption: options.startAirport,
         endAirportOption: options.endAirport,
@@ -36,6 +38,7 @@ program
         departureWindowOption: options.leavingBetween,
         returnWindowOption: options.returningBetween,
         onlyDirectFlightsOption: options.directFlight,
+        onlyOneWayOption: options.oneWay,
       });
       await searchFlights({
         originOption: origin,
@@ -44,6 +47,7 @@ program
         returnDateTimeRangeOption: returnDateTimeRange,
         maximumPriceOption: maximumPrice,
         onlyDirectFlightsOption: onlyDirectFlights,
+        onlyOneWayOption: onlyOneWay,
       });
     } catch (e) {
       console.error(`Rut ro - there was an error: ${e}`); // eslint-disable-line no-console
