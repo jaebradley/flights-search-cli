@@ -27,6 +27,7 @@ export default async function identifyOptions({
   returnWindowOption,
   maxPriceOption,
   onlyDirectFlightsOption,
+  onlyOneWayOption,
 }) {
   const [
     origin,
@@ -40,6 +41,7 @@ export default async function identifyOptions({
   const returnDateTimeRange = executeSafely(() => formatDepartureWindow(parseDepartureWindow(returnWindowOption)));
   const maximumPrice = executeSafely(() => accounting.unformat(maxPriceOption));
   const onlyDirectFlights = !!onlyDirectFlightsOption;
+  const onlyOneWay = !!onlyOneWayOption;
 
   return {
     origin,
@@ -48,5 +50,6 @@ export default async function identifyOptions({
     returnDateTimeRange,
     maximumPrice,
     onlyDirectFlights,
+    onlyOneWay,
   };
 }

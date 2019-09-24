@@ -16,11 +16,17 @@ const searchFlights = async ({
   returnDateTimeRangeOption,
   maximumPriceOption,
   onlyDirectFlightsOption,
+  onlyOneWayOption,
 }) => {
   const locationSelector = new LocationSelector();
   const origin = originOption || await locationSelector.select('Select origin');
   const destination = destinationOption || await locationSelector.select('Select destination');
-  const isRoundTrip = (!!departureDateTimeRangeOption && !!returnDateTimeRangeOption) || await selectIsRoundTrip();
+  let isRoundTrip;
+  if (!returnDateTimeRangeOption && onlyOneWayOption) {
+    isRoundTrip = false;
+  } else {
+    isRoundTrip = (!!departureDateTimeRangeOption && !!returnDateTimeRangeOption) || await selectIsRoundTrip();
+  }
   const maximumPrice = maximumPriceOption || await selectMaximumPrice();
   const onlyDirectFlights = onlyDirectFlightsOption || await selectDirectFlightsOnly();
   const departureDateTimeRange = departureDateTimeRangeOption || formatDepartureWindow(await selectDepartureWindow());

@@ -46,8 +46,10 @@ npm install flights-search-cli --global
 * `-r <Departure Window>` or `--returning-between <Departure Window>` works exactly the same as the `--leaving-between` argument, except for return flights
 * `-$ <price>` or `--max-price <price>` filters out tickets above a certain price in `USD`
   * Like `-$ 500` or `--max-price 500`
-* `-0` or `--direct-flight` filters out flights that are _not_ direct
+* `-d` or `--direct-flight` filters out flights that are _not_ direct
   * It's a boolean flag, so simply specifying the flag is sufficient - there does not need to be a value associated with the argument
+* `-1` or `--one-way` only calculates flights from the departing airport to the arrival airport
+  * If a returning departure window is specified and this boolean flag is specified, the returning departure window _will_ take precedence
 
 ## Development
 
