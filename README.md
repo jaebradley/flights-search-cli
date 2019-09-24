@@ -31,6 +31,26 @@ npm install flights-search-cli --global
 
 ![kiwi-booking](https://imgur.com/iz4V1oX.png)
 
+### Specifying Command Line Arguments
+
+* Instead of following the prompts every single time, you can also take advantage of the following command line arguments
+* `-s <IATA Airport Code>` or `--start-airport <IATA Airport Code>` sets the departure airport
+  * Like `-s SFO` or `--start-airport SFO`
+* `-e <IATA Airport Code>` or `--end-airport <IATA Airport Code>` sets the arriving airport
+  * `-e SFO` or `--end-airport SFO`
+* `-l <Departure Window>` or `--leaving-between <Departure Window>` sets the date(s) or datetime(s) for departure
+  * Like `-l 2019-09-01` or `--leaving-between 2019-09-01`
+  * Can specify a start and an end to a window using the `|` delimiter like (`-l "2019-09-01|2019-09-07"`)
+  * Can also specify a datetime window like `-l "2019-09-01T11:30|2019-09-07T14:30"` which would look at all departure times between `11:30 AM` on `2019-09-01` to `2:30 PM` on `2019-09-07`
+  * Dates need to follow [the HTML5 date format](https://momentjs.com/docs/#/parsing/special-formats/) (`YYYY-MM-DD`) and datetimes need to follow the HTML5 datetime format (`YYYY-MM-DDTHH:mm`)
+* `-r <Departure Window>` or `--returning-between <Departure Window>` works exactly the same as the `--leaving-between` argument, except for return flights
+* `-$ <price>` or `--max-price <price>` filters out tickets above a certain price in `USD`
+  * Like `-$ 500` or `--max-price 500`
+* `-d` or `--direct-flight` filters out flights that are _not_ direct
+  * It's a boolean flag, so simply specifying the flag is sufficient - there does not need to be a value associated with the argument
+* `-1` or `--one-way` only calculates flights from the departing airport to the arrival airport
+  * If a returning departure window is specified and this boolean flag is specified, the returning departure window _will_ take precedence
+
 ## Development
 
 `flights-search-cli` uses [`nvm`](https://github.com/nvm-sh/nvm) to manage `node` and `npm` versions.
@@ -41,9 +61,9 @@ To build the project locally
 
 1. Execute the `compile` command defined in the `package.json` file
    * This should execute the Babel transpilation process and output files to the `build` directory
-1. Execute [the `npm link`](https://docs.npmjs.com/cli/link) command
+2. Execute [the `npm link`](https://docs.npmjs.com/cli/link) command
    * This should symlink the `bin` executable file (`build/executables/flights.js`)
-1. Execute any of the commands (like `flights search`)
+3. Execute any of the commands (like `flights search`)
 
 After making changes to the source code, you will need to rebuild the project and re-link the updated `build` files in order to test any changes you've made to the source code.
 

@@ -1,5 +1,6 @@
 {
   "hooks": {
-    "pre-commit": "npm run commitlint && npm run lint"
+    "pre-commit": "npm run lint",
+    "commit-mrg": "npm run lint-commit-message"
   }
 }

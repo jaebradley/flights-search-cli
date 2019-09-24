@@ -1,5 +1,4 @@
 import inquirer from 'inquirer';
-import moment from 'moment-timezone';
 import { searchFlights as search } from 'skypicker';
 import open from 'open';
 import selectDepartureWindow from './prompters/selectDepartureWindow';
@@ -8,57 +7,47 @@ import LocationSelector from './prompters/locationSelector';
 import selectMaximumPrice from './prompters/selectMaximumPrice';
 import selectDirectFlightsOnly from './prompters/selectDirectFlightsOnly';
 import formatTrip from './formatters/formatTrip';
+import formatDepartureWindow from './formatters/formatDepartureWindow';
 
-const formatDate = ({ date, month, year }) => moment()
-  .year(year)
-  .month(month)
-  .date(date)
-  .startOf('day')
-  .toISOString();
-
-const formatTimeOfDay = ({ hour, minute }) => moment()
-  .hour(hour)
-  .minute(minute)
-  .format('HH:mm');
-
-const searchFlights = async () => {
+const searchFlights = async ({
+  originOption,
+  destinationOption,
+  departureDateTimeRangeOption,
+  returnDateTimeRangeOption,
+  maximumPriceOption,
+  onlyDirectFlightsOption,
+  onlyOneWayOption,
+}) => {
   const locationSelector = new LocationSelector();
-  const origin = await locationSelector.select('Select origin');
-  const destination = await locationSelector.select('Select destination');
-  const departureWindow = await selectDepartureWindow();
-  const isRoundTrip = await selectIsRoundTrip();
-
-  let roundTripDepartureWindow;
-  let returnDepartureDateTimeRange;
-  if (isRoundTrip) {
-    roundTripDepartureWindow = await selectDepartureWindow();
-    returnDepartureDateTimeRange = {
-      days: {
-        start: formatDate(roundTripDepartureWindow.date.start),
-        end: formatDate(roundTripDepartureWindow.date.end),
-      },
-      timeOfDay: {
-        start: formatTimeOfDay(roundTripDepartureWindow.timeOfDay.start),
-        end: formatTimeOfDay(roundTripDepartureWindow.timeOfDay.end),
-      },
-    };
+  const origin = originOption || await locationSelector.select('Select origin');
+  const destination = destinationOption || await locationSelector.select('Select destination');
+  let isRoundTrip;
+  if (returnDateTimeRangeOption) {
+    isRoundTrip = true;
+  } else if (onlyOneWayOption) {
+    isRoundTrip = false;
+  } else {
+    isRoundTrip = await selectIsRoundTrip();
   }
 
-  const maximumPrice = await selectMaximumPrice();
-  const directFlightsOnly = await selectDirectFlightsOnly();
+  const maximumPrice = maximumPriceOption || await selectMaximumPrice();
+  const onlyDirectFlights = onlyDirectFlightsOption || await selectDirectFlightsOnly();
+  const departureDateTimeRange = departureDateTimeRangeOption || formatDepartureWindow(await selectDepartureWindow());
+
+  let returnDepartureDateTimeRange;
+  if (isRoundTrip) {
+    if (returnDateTimeRangeOption) {
+      returnDepartureDateTimeRange = returnDateTimeRangeOption;
+    } else {
+      const returnDepartureWindow = await selectDepartureWindow();
+      returnDepartureDateTimeRange = formatDepartureWindow(returnDepartureWindow);
+    }
+  }
+
   const parameters = {
     departureIdentifier: origin.id,
     arrivalIdentifier: destination.id,
-    departureDateTimeRange: {
-      days: {
-        start: formatDate(departureWindow.date.start),
-        end: formatDate(departureWindow.date.end),
-      },
-      timeOfDay: {
-        start: formatTimeOfDay(departureWindow.timeOfDay.start),
-        end: formatTimeOfDay(departureWindow.timeOfDay.end),
-      },
-    },
+    departureDateTimeRange,
     returnDepartureDateTimeRange,
     priceRange: {
       start: 0,
@@ -66,7 +55,7 @@ const searchFlights = async () => {
     },
     currencyCode: 'USD', // TODO @jaebradley: change from hard-coded value
     partner: 'picky',
-    directFlightsOnly,
+    directFlightsOnly: onlyDirectFlights,
     limit: 25,
   };
 
