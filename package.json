@@ -54,7 +54,7 @@
   "dependencies": {
     "accounting": "^0.4.1",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "chalk": "^2.3.1",
+    "chalk": "^3.0.0",
     "commander": "^3.0.1",
     "country-code-emoji": "1.0.0",
     "fuzzy": "^0.1.3",
