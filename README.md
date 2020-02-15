@@ -2,8 +2,11 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/jaebradley/flights-search-cli.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/jaebradley/flights-search-cli.svg?branch=master)](https://travis-ci.org/jaebradley/flights-search-cli)
+[![codecov](https://codecov.io/gh/jaebradley/flights-search-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/jaebradley/flights-search-cli)
 [![npm](https://img.shields.io/npm/v/flights-search-cli.svg)](https://www.npmjs.com/package/flights-search-cli)
-[![npm](https://img.shields.io/npm/dt/flights-search-cli.svg)](https://www.npmjs.com/package/flights-search-cli)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/flights-search-cli)
+[![npm-total-downloads](https://img.shields.io/npm/dt/flights-search-cli.svg)](https://www.npmjs.com/package/flights-search-cli)
+![GitHub](https://img.shields.io/github/license/jaebradley/flights-search-cli)
 
 ![alt-text](https://imgur.com/54yeBhy.png)
 ![alt-text](https://media.giphy.com/media/1k0AuLZvV7FcMTkDrc/giphy.gif)
