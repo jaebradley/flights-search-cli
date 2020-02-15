@@ -1,6 +1,10 @@
 {
-  "presets": ["env"],
+  "presets": ["@babel/preset-env"],
   "plugins": [
-    "transform-runtime"
+    "@babel/plugin-transform-runtime"
+  ],
+  "ignore": [
+    "node_modules/**",
+    "*.test.js"
   ]
 }
