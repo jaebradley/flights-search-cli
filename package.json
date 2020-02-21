@@ -46,12 +46,12 @@
     "eslint-plugin-import": "^2.20.1",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
-    "semantic-release": "^17.0.3",
+    "semantic-release": "^17.0.4",
     "travis-deploy-once": "^5.0.11"
   },
   "dependencies": {
-    "accounting": "^0.4.1",
     "@babel/plugin-transform-runtime": "^7.8.3",
+    "accounting": "^0.4.1",
     "chalk": "^3.0.0",
     "commander": "^4.1.1",
     "country-code-emoji": "1.0.0",
