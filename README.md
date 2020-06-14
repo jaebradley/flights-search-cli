@@ -1,7 +1,6 @@
 # flights-search-cli
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/jaebradley/flights-search-cli.svg)](https://greenkeeper.io/)
-[![Build Status](https://travis-ci.org/jaebradley/flights-search-cli.svg?branch=master)](https://travis-ci.org/jaebradley/flights-search-cli)
+![Flights Search CLI](https://github.com/jaebradley/flights-search-cli/workflows/Flights%20Search%20CLI/badge.svg)
 [![codecov](https://codecov.io/gh/jaebradley/flights-search-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/jaebradley/flights-search-cli)
 [![npm](https://img.shields.io/npm/v/flights-search-cli.svg)](https://www.npmjs.com/package/flights-search-cli)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/flights-search-cli)
