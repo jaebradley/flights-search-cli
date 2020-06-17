@@ -61,6 +61,6 @@
     "inquirer-datepicker-prompt": "^0.4.2",
     "moment-timezone": "^0.5.31",
     "open": "7.0.4",
-    "skypicker": "^1.0.3"
+    "skypicker": "^1.0.4"
   }
 }
