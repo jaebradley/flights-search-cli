@@ -11,7 +11,7 @@
     "compile": "npx babel -d build/ src/",
     "lint": "npx eslint --ext .js .",
     "lint-commit-message": "npx commitlint --edit $HUSKY_GIT_PARAMS",
-    "test": "npx jest --passWithNoTests",
+    "test": "npx jest --passWithNoTests --forceExit",
     "prepublishOnly": "npm run compile",
     "gc": "npx commit",
     "semantic-release": "npx semantic-release"
