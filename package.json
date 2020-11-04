@@ -14,8 +14,7 @@
     "test": "npx jest --passWithNoTests",
     "prepublishOnly": "npm run compile",
     "gc": "npx commit",
-    "semantic-release": "npx semantic-release",
-    "travis-deploy-once": "npx travis-deploy-once"
+    "semantic-release": "npx semantic-release"
   },
   "repository": {
     "type": "git",
@@ -39,7 +38,6 @@
     "@commitlint/config-angular": "^11.0.0",
     "@commitlint/prompt": "^8.3.5",
     "@commitlint/prompt-cli": "^11.0.0",
-    "@commitlint/travis-cli": "^8.3.5",
     "@octokit/plugin-request-log": "^1.0.2",
     "codecov": "^3.8.1",
     "eslint": "^7.12.1",
