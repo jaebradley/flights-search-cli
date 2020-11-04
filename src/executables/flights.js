@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import program from 'commander';
 
 import pkg from '../../package.json';
