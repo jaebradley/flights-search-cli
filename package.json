@@ -38,6 +38,8 @@
     "@commitlint/config-angular": "^11.0.0",
     "@commitlint/prompt": "^8.3.5",
     "@commitlint/prompt-cli": "^11.0.0",
+    "@commitlint/travis-cli": "^8.3.5",
+    "@octokit/core": "^3.2.1",
     "@octokit/plugin-request-log": "^1.0.2",
     "codecov": "^3.8.1",
     "eslint": "^7.12.1",
