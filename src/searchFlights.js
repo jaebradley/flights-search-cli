@@ -63,22 +63,30 @@ const searchFlights = async ({
 
   const tripMapping = {};
   const formattedTrips = [];
-  searchResults.data.forEach((result) => {
-    const formattedTrip = formatTrip(result);
-    tripMapping[formattedTrip] = result.deep_link;
-    formattedTrips.push(formattedTrip);
-  });
 
-  const { trip } = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'trip',
-      message: 'Choose trip',
-      choices: formattedTrips,
-    },
-  ]);
+  if (searchResults?.data.length) {
+    searchResults.data.forEach((result) => {
+      const formattedTrip = formatTrip(result);
+      tripMapping[formattedTrip] = result.deep_link;
+      formattedTrips.push(formattedTrip);
+    });
 
-  open(tripMapping[trip]);
+    const { trip } = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'trip',
+        message: 'Choose trip',
+        choices: formattedTrips,
+      },
+    ]);
+
+    open(tripMapping[trip]);
+  } else {
+    // eslint-disable-next-line no-console
+    console.log(
+      'No matching ✈️ found. 😓',
+    );
+  }
 };
 
 export default searchFlights;
